@@ -12,7 +12,7 @@ span_sel=matrix(nrow=nrow(y_sel),ncol=1)
 # Curve Fit Every Gene
 for(n in 1:nrow(y_sel))
 {
-  curvefit_sel=loess.as(as.numeric(x_sel),as.numeric(y_sel[n,]),plot=TRUE)
+  curvefit_sel=loess.as(as.numeric(x_sel),as.numeric(y_sel[n,]),plot=FALSE)
   #Test by checking if the fit works
   fit_sel[n,]=as.numeric(curvefit_sel$fitted)
   #plot(as.numeric(x),fit_sel[34030,])
