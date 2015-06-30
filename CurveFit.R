@@ -96,15 +96,17 @@ gene_sel$fileSliceSize = 2000;      # read file in slices of 2,000 rowsB0002  B0
 gene_sel$LoadFile(expression_file_name);
 
 meq_sel= Matrix_eQTL_engine(
-  snps = sel, # contains all samples (+ ctrl) 
-  gene = gene_sel, # Contains all samples (+ctrl)
+  snps = sel,  
+  gene = gene_sel,
   cvrt = ncvrt, 
   output_file_name = tempfile(),
-  pvOutputThreshold = 1e_10, 
+  pvOutputThreshold = 1e-30, 
   useModel = modelLINEAR, 
   errorCovariance = numeric(), 
   verbose = TRUE,
-  pvalue.hist = "qqplot");
+  pvalue.hist = "qqplot")
+
+
 
 
 
