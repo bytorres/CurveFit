@@ -13,15 +13,15 @@ i=1
 for(n in 1:ncol(sel_snp_gtype))
 {
   n
-  #a<-as.data.frame(table(nksnp_data[,choosen_idx[n]])) # Tally on # of 0,1,2
+  a<-as.data.frame(table(nksnp_data[,choosen_idx[n]])) # Tally on # of 0,1,2
   #NKG7_nm<-NKG7[which(as.numeric(nksnp_data[,choosen_idx[n]])==2)]
   #RBC_nm<-RBC[which(as.numeric(nksnp_data[,choosen_idx[n]])==2)]
   #variance_2<-sqrt(var(NKG7_nm)+var(RBC_nm))
   
   
   
-  #if (!is.na(variance_2) ) ## a[3,2] >10 #variance_2 < 2 && 
-  #{
+  if (a[3,2] >5 ) ##  #variance_2 < 2 && ##!is.na(variance_2)
+  {
     
     #variance_2
     quartz(width=3,height=6.5)
@@ -32,7 +32,7 @@ for(n in 1:ncol(sel_snp_gtype))
     multiplot(t0,t1,t2)
     remove(t0,t1,t2)
     i=i+1
-  #}
+  }
   
   
 }
