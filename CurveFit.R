@@ -1,4 +1,10 @@
 ## Better Curve Fit Analysis Using Loessas Function
+#Select Stages to Examine
+#variable b contains all the ctrl data
+#d<-b[52:87,]#varaible d contains the selection
+#plot(b[,2],b[,1],xlim=c(-3,3),ylim=c(-1.5,1.5))
+#points(d[,2],d[,1],col='red',pch=20)
+
 
 #Variables
 x_sel<-c[,2]
@@ -95,7 +101,7 @@ gene_sel$fileSkipColumns = 1;       # one column of row labels
 gene_sel$fileSliceSize = 2000;      # read file in slices of 2,000 rowsB0002  B0003  B0005  B0006  B0007	B0008	B0009	B0010	B0011	B0012	B0013	B0014	B0015	B0016	B0017	B0018	B0019	B0020	B0021	B0022	B0023	B0024	B0026	B0025	B0027	B0028	B0029	B0030	B0031	B0032	B0033	B0034	B0035	B0036	B0038	B0040	B0041	B0043	B0044	B0045	B0046	B0047	B0048	B0049	B0051	B0052	B0053	B0054	B0055	C0001	C0002	C0003	C0004	C0005	C0006	C0007	C0008	C0009	C0010	C0011	C0012	C0013	C0014	C0016	C0017	C0018	C0019	C0020	C0021	C0022	C0023	C0024	C0025	C0026	C0027	C0028	C0029	C0030	C0031	C0032	C0033	C0034	C0035	C0036	C0037	C0038	C0039	HFS101	HFS105	HFS106	HFS109	HFS110	HFS111	HFS112	HFS113	HFS114	HFS115	HFS116	HFS117	HFS118	HFS119	HFS120	HFS122	HFS124	HFS126	HFS127	HFS129	HFS130	HFS132	HFS134	HFS135	HFS136	HFS137	HFS138	HFS139	HFS140	HFS141	HFS143	HFS144	HFS145	HFS146	HFS147	HFS148	HFS149	HFS150	HFS151	HFS152	HFS153	HFS154	HFS157	HFS158	HFS159	HFS160	HFS161	HFS162	HFS163	HFS164	HFS165	HFS166	HFS167	HFS168	HFS169	HFS170	HFS171	HFS172	HFS173
 gene_sel$LoadFile(expression_file_name);
 
-meq_sel_10_10= Matrix_eQTL_engine(
+meq_sel_less= Matrix_eQTL_engine(
   snps = sel,  
   gene = gene_sel,
   cvrt = ncvrt, 
@@ -110,12 +116,12 @@ meq_sel_10_10= Matrix_eQTL_engine(
 
 
 
-View(meq_sel_10$all$eqtls)
-sel_hits<-meq_sel_10$all$eqtls
+View(meq_sel_lesS$all$eqtls)
+sel_hits<-meq_sel_lesS$all$eqtls
 write.table(sel_hits,'sel_hits_10.txt',sep="\t")
 
 
-sel_snps<-as.character(meq_sel_10$all$eqtls$snps)
+sel_snps<-as.character(meq_sel_lesS$all$eqtls$snps)
 sel_snps<-unique(sel_snps)
 snp_list<-data2_add@gtdata@snpnames
 sel_idx<-which(snp_list %in% sel_snps)
@@ -132,7 +138,7 @@ sel_snp_gtype<-sel_snp_gtype[which(row.names(sel_snp_gtype) %in% ctrl_id),]
 
 
 # GENE SYMBOL: had to download the sel10_expression list []1
-#sel_resid_gene_fix<-meq_sel_10_fix$all$eqtls$gene
+#sel_resid_gene_fix<-meq_sel_lesS_fix$all$eqtls$gene
 #sel_resid_gene_fix<-as.character(sel_resid_gene_fix)
 #sel_resid_gene_fix<-as.numeric(sel_resid_gene_fix)
 #sel_resid_symbol_fix<-sel_symbol[sel_resid_gene_fix]
