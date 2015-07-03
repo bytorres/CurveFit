@@ -3,9 +3,10 @@
 library("rsnps", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
 #library("ggplot2", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
 t<-numeric(0)
-nk_snpdata<-sel_snp_gtype   # is the QTL hits
+nk_snpdata<-sel_snp_gtype   # is the unique QTL hits
 choosen_idx<-c(1:ncol(sel_snp_gtype)) # idx of significant  ## for the selected analysis there is no specific idx 
-View9symbol<-sel_snp_symbol
+
+symbol<-sel_snps
 
 n=0
 #Making changes to see if its being recognized
@@ -20,7 +21,7 @@ for(n in 1:ncol(sel_snp_gtype))
   
   
   
-  if (a[3,2] >10 ) ##  #variance_2 < 2 && ##!is.na(variance_2)
+  if (a[3,2] > 5 ) ##  #variance_2 < 2 && ##!is.na(variance_2)
   {
     
     #variance_2
@@ -38,13 +39,13 @@ for(n in 1:ncol(sel_snp_gtype))
 }
 
 
-snp_query_topresid<-NCBI_snp_query(sel_snp_symbol)
+snp_query_topresid<-NCBI_snp_query(symbol)
 #tableau_heterosmall<-nksnp_data[,choosen_idx]
 #View(tableau_heterosmall)
 #tableau_heterosmall<-cbind(tableau_heterosmall,NKG7,RBC)
 #write.table(tableau_heterosmall,'06_24_15_SigSNPS.txt',sep='\t')
 
-write.table(snp_query_topresid,'07_01_15_SignSNPSNCBI.txt',sep='\t')
+write.table(snp_query_topresid,'07_02_15_RecSNPSNCBI.txt',sep='\t')
 
 
 ## Check how many of the hits have more than ten samples equal to 2
