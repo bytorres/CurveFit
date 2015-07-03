@@ -6,18 +6,18 @@ library("rsnps", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources
 
 # Variables
 t<-numeric(0)
-nksnp_data<-ctrlsnp_all   # is the unique QTL hits
-#choosen_idx<-c(1:ncol(sel_snp_gtype)) # idx of significant  ## for the selected analysis there is no specific idx 
+nksnp_data<-sel_snp_gtype#ctrlsnp_all   # is the unique QTL hits
+choosen_idx<-c(1:ncol(sel_snp_gtype)) # idx of significant  ## for the selected analysis there is no specific idx 
 
-symbol<-colnames(ctrlsnp_all)
+symbol<-colnames(sel_snp_gtype)#colnames(ctrlsnp_all)
 n=0
 i=1
 
 #Run a specific List
-list<-c('rs2843159','rs2842933','rs3094315','rs3855951')
-idx<-which(symbol %in% list)
+##list<-c('rs2843159','rs2842933','rs3094315','rs3855951')
+#idx<-which(symbol %in% list)
 
-choosen_idx<-idx#AllSNPsel
+#choosen_idx<-idx#AllSNPsel
 
 
 for(n in 1:length(choosen_idx))  #ncol(sel_snp_gtype)
@@ -30,7 +30,7 @@ for(n in 1:length(choosen_idx))  #ncol(sel_snp_gtype)
   
   
   
-  if (a[3,2] > 10 ) ##  #variance_2 < 2 && ##!is.na(variance_2)
+  if (a[3,2] > 5 && !is.na(a[3,2]) ) ##  #variance_2 < 2 && ##!is.na(variance_2)
   {
     
     #variance_2
@@ -48,7 +48,7 @@ for(n in 1:length(choosen_idx))  #ncol(sel_snp_gtype)
 }
 
 
-snp_query_topresid<-NCBI_snp_query(list)
+#snp_query_topresid<-NCBI_snp_query(list)
 #tableau_heterosmall<-nksnp_data[,choosen_idx]
 #View(tableau_heterosmall)
 #tableau_heterosmall<-cbind(tableau_heterosmall,NKG7,RBC)
@@ -58,17 +58,18 @@ snp_query_topresid<-NCBI_snp_query(list)
 
 
 ## Check how many of the hits have more than ten samples equal to 2
-#b<-numeric(0)
+b<-numeric(0)
 #c<-numeric(0)
 
 
-#for(n in 1:length(choosen_idx))
-#{
+for(n in 1:length(choosen_idx))
+  {
 
-#a<-as.data.frame(table(nksnp_data[,chooosen_idx[n]])
+      a<-as.data.frame(table(nksnp_data[,choosen_idx[n]]))
+      b[n]<-a[3,2]
+      t[n]<-n
 
-#b[n]<-a[3,2]
-#t[n]<-n
+  }
 #NKG7_nm<-NKG7[which(as.numeric(nksnp_data[,choosen_idx[n]])==2)]
 #RBC_nm<-RBC[which(as.numeric(nksnp_data[,choosen_idx[n]])==2)]
 #variance_2<-sqrt(var(NKG7_nm)+var(RBC_nm))
@@ -76,7 +77,7 @@ snp_query_topresid<-NCBI_snp_query(list)
 #remove(RBC_nm)
 #remove(NKG7_nm)
 
-#}
+
 
 
 #table(b>10)
