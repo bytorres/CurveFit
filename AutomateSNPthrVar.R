@@ -2,15 +2,24 @@
 #rSNPS
 library("rsnps", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
 #library("ggplot2", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
+
+
+# Variables
 t<-numeric(0)
 nksnp_data<-ctrlsnp_all   # is the unique QTL hits
 #choosen_idx<-c(1:ncol(sel_snp_gtype)) # idx of significant  ## for the selected analysis there is no specific idx 
-choosen_idx<-AllSNPsel
-symbol<-colnames(ctrlsnp_all)
 
+symbol<-colnames(ctrlsnp_all)
 n=0
-#Making changes to see if its being recognized
 i=1
+
+#Run a specific List
+list<-c('rs2843159','rs2842933','rs3094315','rs3855951')
+idx<-which(symbol %in% list)
+
+choosen_idx<-idx#AllSNPsel
+
+
 for(n in 1:length(choosen_idx))  #ncol(sel_snp_gtype)
 {
   n
@@ -39,7 +48,7 @@ for(n in 1:length(choosen_idx))  #ncol(sel_snp_gtype)
 }
 
 
-#snp_query_topresid<-NCBI_snp_query(symbol)
+snp_query_topresid<-NCBI_snp_query(list)
 #tableau_heterosmall<-nksnp_data[,choosen_idx]
 #View(tableau_heterosmall)
 #tableau_heterosmall<-cbind(tableau_heterosmall,NKG7,RBC)
